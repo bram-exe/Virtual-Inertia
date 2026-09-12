@@ -1,41 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Virtual Inertia Market Design — CSU Senior Design</title>
+<meta name="description" content="Senior design project designing market mechanisms for virtual inertia in electric power systems. Colorado State University, Walter Scott, Jr. College of Engineering.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header>
-        <h1>Virtual Inertia Market Design</h1>
-        <h2>Team: Bram Copeland, Jasmine Cheng, Andrew Weskamp</h2>
-    </header>
-    
-    <nav class="navbar">
-        <ul>
-            <li><a href="index.html">Home</a> </li>
-            <li><a href="team.html">Team</a> </li>
-            <li><a href="pics.html">Pics</a> </li>
-        </ul>
+<!-- ============ NAV ============ -->
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <span class="dot"></span>
+      Virtual Inertia Market Design <span class="sub">· CSU ECE</span>
+    </a>
+    <nav>
+      <ul class="nav">
+        <li><a href="index.html" class="active">Overview</a></li>
+        <li><a href="timeline.html">Timeline</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="documents.html">Documents</a></li>
+        <li><a href="pics.html">Pictures &amp; Demos</a></li>
+        <li><a href="acknowledgements.html">Acknowledgements</a></li>
+      </ul>
     </nav>
-    
-    <main>
-        <h3>Project Summary</h3>
-        <p>We are developing a market mechanism for buying and selling virtual inertia. The design will include an in depth report, as well as 
-            a physical representation of the model design. The report will include pricing, communication, and other aspects that dictate an ancillary market. 
-            We are working with Grid United to develop the mechanim, with our home base in the CSU Powerhouse campus. </p>
-        <img src="imgs/img1.png"/>
-        <p style="font-weight: bold; text-align: center;">Fig. 1: blah blah blah</p>
-        <img src="imgs/img2.png" style="height: 200px;"/>
-    </main>
-    
-    <footer>
-        <a href="https://www.engr.colostate.edu/ece/"><img src="imgs/logo2.png"/></a>
-        <a href="https://www.colostate.edu/"><img src="imgs/logo1.png"/></a>
-        <p style="color: aliceblue;">copyright</p>
-    </footer>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<div class="hero">
+  <div class="hero-map"><img src="imgs/network.svg" alt=""></div>
+  <div class="wrap">
+    <p class="eyebrow">Colorado State University &middot; ECE Senior Design</p>
+    <h1>Virtual Inertia Market Design</h1>
+    <p class="lede">
+      Developing a market mechanism for buying and selling virtual inertia. The design
+      covers pricing, communication, and other factors relevant to this ancillary
+      services market, delivered as an in-depth report alongside a physical
+      representation of the model design.
+    </p>
+    <p class="hero-team">Bram Copeland <span class="sep">&middot;</span> Jasmine Cheng <span class="sep">&middot;</span> Andrew Weskamp</p>
+    <p class="hero-collab">In collaboration with <b>Grid United</b></p>
+  </div>
+</div>
+
+<main>
+<div class="wrap">
+
+  <!-- ============ SUMMARY / ABSTRACT ============ -->
+  <section>
+    <h2 class="sec">Summary &amp; Abstract</h2>
+    <p class="sec-note">Project abstract as written for the project charter.</p>
+    <!-- TODO: replace this placeholder block with the abstract -->
+    <div class="placeholder">
+      <span class="ph-label">To be added</span>
+      <p>Write the project summary / abstract here — the problem, why inertia markets
+         matter, and what the team is delivering.</p>
+    </div>
+  </section>
+
+  <!-- ============ BACKGROUND ============ -->
+  <section>
+    <h2 class="sec">Project Background</h2>
+    <p class="sec-note">Context and motivation behind the project.</p>
+    <!-- TODO: replace with background write-up -->
+    <div class="placeholder">
+      <span class="ph-label">To be added</span>
+      <p>Background on system inertia, declining synchronous generation, and the role of
+         inverter-based resources.</p>
+      <p>Prior work, existing ancillary service markets, and the gap this project addresses.</p>
+    </div>
+  </section>
+
+  <!-- ============ OBJECTIVE & SCOPE ============ -->
+  <section>
+    <h2 class="sec">Objective &amp; Scope</h2>
+    <p class="sec-note">Project objective, scope, and major tasks from the project charter.</p>
+    <div class="grid-2">
+      <!-- TODO: fill in objective -->
+      <div class="placeholder">
+        <span class="ph-label">Objective</span>
+        <p>State the primary objective of the project in one or two sentences.</p>
+      </div>
+      <!-- TODO: fill in scope -->
+      <div class="placeholder">
+        <span class="ph-label">Scope</span>
+        <p>What is in scope, and explicitly what is out of scope.</p>
+      </div>
+    </div>
+    <div class="card" style="margin-top:14px;">
+      <h3>Major Tasks</h3>
+      <!-- TODO: replace list items with real tasks -->
+      <div class="placeholder" style="margin-top:10px;">
+        <span class="ph-label">To be added</span>
+        <p>List the major tasks / work packages defined in the project charter.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ GOALS & CONSTRAINTS ============ -->
+  <section>
+    <h2 class="sec">Goals &amp; Constraints</h2>
+    <p class="sec-note">Design goals, requirements, and the constraints the design must satisfy.</p>
+    <div class="grid-2">
+      <!-- TODO: fill in goals -->
+      <div class="placeholder">
+        <span class="ph-label">Goals</span>
+        <p>Measurable goals the design is evaluated against.</p>
+      </div>
+      <!-- TODO: fill in constraints -->
+      <div class="placeholder">
+        <span class="ph-label">Constraints</span>
+        <p>Technical, economic, regulatory, schedule, and resource constraints.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CURRENT STATUS ============ -->
+  <section>
+    <h2 class="sec">Current Status</h2>
+    <p class="sec-note">Short status note — update at the end of every calendar month.</p>
+    <!-- TODO: update monthly -->
+    <div class="placeholder">
+      <span class="ph-label">To be added</span>
+      <p>One short paragraph on where the project stands. Full schedule lives on the
+         <a href="timeline.html">Timeline</a> page.</p>
+    </div>
+  </section>
+
+  <!-- ============ ADVISORS ============ -->
+  <section>
+    <h2 class="sec">Advisors &amp; Collaboration</h2>
+    <p class="sec-note">Faculty and industry advisors supervising the project.</p>
+    <div class="grid-2">
+      <!-- TODO: add faculty advisor name + link to their CSU page -->
+      <div class="placeholder">
+        <span class="ph-label">Faculty Advisor</span>
+        <p>Name, title, and a link to their department page.</p>
+      </div>
+      <!-- TODO: add industry advisor / sponsor contact -->
+      <div class="placeholder">
+        <span class="ph-label">Industry Advisor</span>
+        <p>Name, organization, and role on the project.</p>
+      </div>
+    </div>
+    <div class="card" style="margin-top:14px;">
+      <h3>Meeting Time &amp; Venue</h3>
+      <!-- TODO: fill in recurring meeting time and location -->
+      <div class="placeholder" style="margin-top:10px;">
+        <span class="ph-label">To be added</span>
+        <p>Recurring team / advisor meeting day, time, and venue.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>Colorado State University</h4>
+        <div class="logos">
+          <a href="https://www.engr.colostate.edu/ece/" title="ECE Department">
+            <img src="imgs/logo2.png" alt="Walter Scott, Jr. College of Engineering">
+          </a>
+          <a href="https://www.colostate.edu/" title="Colorado State University">
+            <img src="imgs/logo1.png" alt="Colorado State University">
+          </a>
+        </div>
+        <p style="color:var(--text-faint);margin:0;font-size:.82rem;">
+          Walter Scott, Jr. College of Engineering<br>
+          Department of Electrical &amp; Computer Engineering
+        </p>
+      </div>
+      <div>
+        <h4>Program Links</h4>
+        <ul>
+          <li class="support"><a href="https://give.colostate.edu/campaigns/40250/donations/new">Support our program</a></li>
+          <li><a href="https://www.engr.colostate.edu/ece/senior-design/?ay=2026">Other ECE Sr. Design projects</a></li>
+          <li><a href="https://www.engr.colostate.edu/ece/">ECE Department</a></li>
+          <li><a href="https://www.colostate.edu/">Colorado State University</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Project</h4>
+        <ul>
+          <li><a href="index.html">Overview</a></li>
+          <li><a href="timeline.html">Timeline &amp; Deliverables</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="documents.html">Documents</a></li>
+          <li><a href="pics.html">Pictures &amp; Demos</a></li>
+          <li><a href="acknowledgements.html">Acknowledgements</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 2026 Virtual Inertia Market Design — CSU ECE Senior Design</span>
+      <!-- TODO: update this date when you update the site -->
+      <span class="mono">Last updated: —</span>
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>
