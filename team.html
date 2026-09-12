@@ -1,35 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Team — Virtual Inertia Market Design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header>
-        <h1>Project Name</h1>
-        <h2>Team: ...</h2>
-    </header>
-    
-    <nav class="navbar">
-        <ul>
-            <li><a href="index.html">Home</a> </li>
-            <li><a href="team.html">Team</a> </li>
-            <li><a href="pics.html">Pics</a> </li>
-        </ul>
+<!-- ============ NAV ============ -->
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <span class="dot"></span>
+      Virtual Inertia Market Design <span class="sub">· CSU ECE</span>
+    </a>
+    <nav>
+      <ul class="nav">
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="timeline.html">Timeline</a></li>
+        <li><a href="team.html" class="active">Team</a></li>
+        <li><a href="documents.html">Documents</a></li>
+        <li><a href="pics.html">Pictures &amp; Demos</a></li>
+        <li><a href="acknowledgements.html">Acknowledgements</a></li>
+      </ul>
     </nav>
-    
-    <main>
-        <h3>text</h3>
-    </main>
-    
-    <footer>
-        <a href="https://www.engr.colostate.edu/ece/"><img src="imgs/logo2.png"/></a>
-        <a href="https://www.colostate.edu/"><img src="imgs/logo1.png"/></a>
-        <p style="color: aliceblue;">copyright</p>
-    </footer>
+  </div>
+</header>
+
+<!-- ============ PAGE HEADER ============ -->
+<div class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">Students · Advisors</p>
+    <h1>Team</h1>
+    <p>Students, faculty and industry advisors, and project collaborators.</p>
+  </div>
+</div>
+
+<main>
+<div class="wrap">
+
+  <section>
+    <h2 class="sec">Students</h2>
+    <p class="sec-note">Undergraduate team members. Add a photo to <code>imgs/</code> and point the image tag at it.</p>
+    <div class="grid-2">
+      <div class="person">
+        <!-- TODO: swap in a real photo: <img src="imgs/your-photo.jpg" alt="Bram Copeland"> -->
+        <div class="avatar">BC</div>
+        <div>
+          <p class="role">Student · Electrical Engineering</p>
+          <h3>Bram Copeland</h3>
+          <!-- TODO: add a short bio, focus area, and professional / personal interests -->
+          <p style="color:var(--text-faint);font-style:italic;">Short bio, role on the project, and areas of interest — to be added.</p>
+          <p class="links"><!-- TODO: resume / LinkedIn / email links --></p>
+        </div>
+      </div>
+      <div class="person">
+        <!-- TODO: swap in a real photo: <img src="imgs/your-photo.jpg" alt="Jasmine Cheng"> -->
+        <div class="avatar">JC</div>
+        <div>
+          <p class="role">Student · Electrical Engineering</p>
+          <h3>Jasmine Cheng</h3>
+          <!-- TODO: add a short bio, focus area, and professional / personal interests -->
+          <p style="color:var(--text-faint);font-style:italic;">Short bio, role on the project, and areas of interest — to be added.</p>
+          <p class="links"><!-- TODO: resume / LinkedIn / email links --></p>
+        </div>
+      </div>
+      <div class="person">
+        <!-- TODO: swap in a real photo: <img src="imgs/your-photo.jpg" alt="Andrew Weskamp"> -->
+        <div class="avatar">AW</div>
+        <div>
+          <p class="role">Student · Electrical Engineering</p>
+          <h3>Andrew Weskamp</h3>
+          <!-- TODO: add a short bio, focus area, and professional / personal interests -->
+          <p style="color:var(--text-faint);font-style:italic;">Short bio, role on the project, and areas of interest — to be added.</p>
+          <p class="links"><!-- TODO: resume / LinkedIn / email links --></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="sec">Advisors</h2>
+    <p class="sec-note">Faculty, graduate, and industry advisors. Consider linking to the advisor's department page.</p>
+    <div class="grid-2">
+      <!-- TODO: faculty advisor -->
+      <div class="placeholder">
+        <span class="ph-label">Faculty Advisor</span>
+        <p>Name, title, department, and a link to their CSU page.</p>
+      </div>
+      <!-- TODO: industry advisor -->
+      <div class="placeholder">
+        <span class="ph-label">Industry Advisor</span>
+        <p>Name, organization, and role on the project.</p>
+      </div>
+      <!-- TODO: graduate student advisor, if applicable -->
+      <div class="placeholder">
+        <span class="ph-label">Graduate Advisor</span>
+        <p>Name and research area.</p>
+      </div>
+      <!-- TODO: delete this block if not needed -->
+      <div class="placeholder">
+        <span class="ph-label">Additional</span>
+        <p>Any other collaborator to credit here.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="sec">Collaboration</h2>
+    <p class="sec-note">Industry and lab partners.</p>
+    <div class="card">
+      <h3>Grid United</h3>
+      <!-- TODO: describe the nature of the collaboration -->
+      <p style="color:var(--text-faint);font-style:italic;margin:0;">Describe how the team works with Grid United — to be added.</p>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>Colorado State University</h4>
+        <div class="logos">
+          <a href="https://www.engr.colostate.edu/ece/" title="ECE Department">
+            <img src="imgs/logo2.png" alt="Walter Scott, Jr. College of Engineering">
+          </a>
+          <a href="https://www.colostate.edu/" title="Colorado State University">
+            <img src="imgs/logo1.png" alt="Colorado State University">
+          </a>
+        </div>
+        <p style="color:var(--text-faint);margin:0;font-size:.82rem;">
+          Walter Scott, Jr. College of Engineering<br>
+          Department of Electrical &amp; Computer Engineering
+        </p>
+      </div>
+      <div>
+        <h4>Program Links</h4>
+        <ul>
+          <li class="support"><a href="https://give.colostate.edu/campaigns/40250/donations/new">Support our program</a></li>
+          <li><a href="https://www.engr.colostate.edu/ece/senior-design/?ay=2026">Other ECE Sr. Design projects</a></li>
+          <li><a href="https://www.engr.colostate.edu/ece/">ECE Department</a></li>
+          <li><a href="https://www.colostate.edu/">Colorado State University</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Project</h4>
+        <ul>
+          <li><a href="index.html">Overview</a></li>
+          <li><a href="timeline.html">Timeline &amp; Deliverables</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="documents.html">Documents</a></li>
+          <li><a href="pics.html">Pictures &amp; Demos</a></li>
+          <li><a href="acknowledgements.html">Acknowledgements</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 2026 Virtual Inertia Market Design &mdash; CSU ECE Senior Design</span>
+      <!-- TODO: update this date when you update the site -->
+      <span class="mono">Last updated: &mdash;</span>
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>
