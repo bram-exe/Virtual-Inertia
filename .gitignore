@@ -1,2 +1,5 @@
 # ANDES simulation output files
 *_out.*
+
+# Personal VS Code settings (machine-specific paths)
+.vscode/
