@@ -1,0 +1,37 @@
+ANDES 2.0.0
+Copyright (C) 2015-2026 Hantao Cui
+
+ANDES comes with ABSOLUTELY NO WARRANTY
+Case file: wscc9_dyn.xlsx
+Report time: 10/24/2026 02:45:06 PM
+
+Power flow converged in 2 iterations.
+Flat-start: No
+
+
+EIGENVALUE ANALYSIS REPORT                                    
+
+Positives         
+Zeros             
+Negatives         
+
+STATISTICS
+                     Most Associated              Real             Imag.      Damped Freq.         Frequency       Damping [%]
+
+#1                   delta GENCLS G3           -2.6537                 0                 0                 0                 0
+#2                   omega GENCLS G2           -1.6439                 0                 0                 0                 0
+#3**                 delta GENCLS G3            2.6537                 0                 0                 0                 0
+#4**                 omega GENCLS G2            1.6439                 0                 0                 0                 0
+#5*                  delta GENCLS G1         4.037e-16        2.2734e-07        3.6182e-08        3.6182e-08       -1.7758e-07
+#6*                  delta GENCLS G1         4.037e-16       -2.2734e-07        3.6182e-08        3.6182e-08       -1.7758e-07
+
+EIGENVALUE DATA
+                                  #1                #2              #3**              #4**               #5*               #6*
+
+delta GENCLS G1              0.07397           0.15768           0.07397           0.15768           0.44903           0.44903
+delta GENCLS G2              0.03765           0.31077           0.03765           0.31077           0.15158           0.15158
+delta GENCLS G3               0.3587           0.18078            0.3587           0.18078           0.03947           0.03947
+omega GENCLS G1              0.04135           0.08816           0.04135           0.08816           0.25105           0.25105
+omega GENCLS G2              0.04432           0.36587           0.04432           0.36587           0.17845           0.17845
+omega GENCLS G3               0.2361           0.11899            0.2361           0.11899           0.02598           0.02598
+
