@@ -1,7 +1,6 @@
 .venv/
 .venv312/
 test andes.py
-jasmine_wscc_test.py
 # ANDES simulation output files
 *_out.*
 
