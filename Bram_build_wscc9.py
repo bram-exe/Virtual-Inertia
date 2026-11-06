@@ -39,5 +39,8 @@ ss.add('GENCLS', dict(idx='G2', bus=2, gen=2, Sn=100, M=12.08,  D=0, xd1=0.1198,
 #GENERATOR 1: Base = 100MVA, M = 6.08, xd = 0.1813
 ss.add('GENCLS', dict(idx='G3', bus=3, gen=3, Sn=100, M=6.02,  D=0, xd1=0.1813, ra=0))
 
+#
+
+
 ss.setup()
 andes.io.xlsx.write(ss, 'wscc9_dyn.xlsx', overwrite=True)
