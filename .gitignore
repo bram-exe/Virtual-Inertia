@@ -4,5 +4,6 @@ test andes.py
 # ANDES simulation output files
 *_out.*
 
+wscc9_dyn.xlsx
 # Personal VS Code settings (machine-specific paths)
 .vscode/
