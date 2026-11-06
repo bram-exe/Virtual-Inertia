@@ -35,9 +35,28 @@ ss = andes.load(andes.get_case('wscc9/wscc9.xlsx'), setup=False)
 #GENERATOR 1: Base = 100MVA, M = 47.28, xd = 0.0608
 ss.add('GENCLS', dict(idx='G1', bus=1, gen=1, Sn=100, M=47.28, D=0, xd1=0.0608,  ra=0))
 #GENERATOR 2: Base = 100MVA, M = 12.08, xd = 0.1198
-ss.add('GENCLS', dict(idx='G2', bus=2, gen=2, Sn=100, M=12.08,  D=0, xd1=0.1198, ra=0))
+ss.add('GENCLS', dict(idx='G2', bus=2, gen=2, Sn=100, M=12.80,  D=0, xd1=0.1198, ra=0))
 #GENERATOR 1: Base = 100MVA, M = 6.08, xd = 0.1813
 ss.add('GENCLS', dict(idx='G3', bus=3, gen=3, Sn=100, M=6.02,  D=0, xd1=0.1813, ra=0))
 
+#
+
+
 ss.setup()
 andes.io.xlsx.write(ss, 'wscc9_dyn.xlsx', overwrite=True)
+
+ss = andes.load('wscc9_dyn.xlsx', setup=False)
+
+for g in ['G1', 'G2', 'G3']:
+    pass
+    #ss.add('TGOV1', dict(syn=g, R=0.05, ...))   # check ss.TGOV1.doc() for params
+
+ss.add('Toggle', dict(model='GENCLS', dev='G3', t=1.0))
+ss.setup()
+
+#ss.PFlow.run()
+#ss.TDS.config.tf = 20
+#ss.TDS.run()
+#ss.TDS.plt.plot(ss.GENCLS.omega)
+print("TGOV 1 Info:")
+ss.TGOV1.doc()
