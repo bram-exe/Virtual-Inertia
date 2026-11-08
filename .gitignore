@@ -1,9 +1,9 @@
 .venv/
 .venv312/
 test andes.py
+Jasmine_work\Jasmine_bus_freq_test.py
 # ANDES simulation output files
 *_out.*
 
-wscc9_dyn.xlsx
 # Personal VS Code settings (machine-specific paths)
 .vscode/
