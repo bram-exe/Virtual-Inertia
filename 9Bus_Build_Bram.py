@@ -4,8 +4,8 @@
     Generator Bus 2: Solar Yard (Grid following, no inertia)
     Generator Bus 3: HVDC with GFM inverter ###COME BACK TO WITH A REALISTIC M VALUE) 
 
-    Load 5: Utility (Use values from WCCS)
-    Load 6: Utility (Use values from WCCS)
+    Load 5: Utility (Use values from WSCC)
+    Load 6: Utility (Use values from WSCC)
     Load 7: Data center (New PQ Load)
     Load 8: WSCC Load????
     Change to fort collins load^^^
@@ -14,6 +14,7 @@
 
 """
 import andes 
+import argparse
 
 # Using 100MVA system base 
 
@@ -39,8 +40,8 @@ REGCV1_GAINS = dict(
     KiIq = 0.1,
 )
 
-def build(out='9bus_sim.xlsx', **kw):
-    p = {**DEFAULTS, **kw}
+def build(out='9bus_sim.xlsx', **overrides):
+    p = {**DEFAULTS, **overrides}
     ss = andes.load(andes.get_case('wscc9/wscc9.xlsx'), setup=False, no_output=True)
 
     #-------------------------Generator 1-------------------------
@@ -93,10 +94,10 @@ def build(out='9bus_sim.xlsx', **kw):
     ss.add('REECA1', dict(idx='REE_G2', 
                           reg='G2_solar',
                           PFFLAG=0, # Hold constant Q, set to =1 to hold constant PF
-                          VFLAG=0,  #
-                          QFLAG=0, 
-                          PFLAG=0, 
-                          PQFLAG=0,
+                          VFLAG=0,  # voltage control in Q loop (ignored since QFLAG=0)
+                          QFLAG=0, # bypass Q/V control loops
+                          PFLAG=0, # P command not scaled by frequency
+                          PQFLAG=0, # Q priority when current-limited
                           ))
 
     #-------------------------Generator 3-------------------------
@@ -115,3 +116,24 @@ def build(out='9bus_sim.xlsx', **kw):
                       bus=7,
                       p0=p['dc_P'], 
                       q0=p['dc_Q']))
+
+    ss.setup()
+    andes.io.xlsx.write(ss, out, overwrite=True)
+    return out
+
+if __name__ == '__main__':
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--out', default='9bus_sim.xlsx')
+    for k, v in DEFAULTS.items():
+        ap.add_argument(f'--{k}', type=float, default=v)
+    a = vars(ap.parse_args())
+    #print('wrote', build(a.pop('out'), **a))
+    out = build(a.pop('out'), **a)
+    print('wrote', out)
+    # --- sanity check: 10 s with NO disturbance, frequency should stay at 60 Hz ---
+    ss = andes.load(out, no_output=True)
+    ss.PFlow.run()
+    ss.TDS.config.tf = 10
+    ss.TDS.run()
+    f = ss.dae.ts.x[:, ss.GENROU.omega.a[0]] * 60
+    print(f'gas unit freq: min {f.min():.4f} Hz, max {f.max():.4f} Hz')
