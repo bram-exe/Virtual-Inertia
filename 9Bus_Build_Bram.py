@@ -20,7 +20,7 @@ import argparse
 
 DEFAULTS = dict(
     G1_Sn = 250, G1_H = 5.0, #Gas turbine 
-    M_vsm = 4.0, #Virtual inertia from GFM
+    M_vsm = 4.0, #Virtual inertia from GFM HVDC
     D_vsm = 0.0, kw_vsm=20.0, #damping and droop
     dc_P = 1.0, dc_Q = 0.20 #Data center load info in per unit
 )
