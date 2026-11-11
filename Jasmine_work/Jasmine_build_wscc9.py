@@ -12,8 +12,8 @@ andes.config_logger(stream_level=20)
 
 ss.add('GENCLS', dict(idx='G1', bus=1, gen=1, Sn=100, M=21.0, D=0, xd1=0.0608,  ra=0))
 #GENERATOR 2: Base = 100MVA, M = 12.08, xd = 0.1198
-#ss.add('REGCA1', dict(idx='G2', bus=2, gen=2, Sn=100, xs=0.1198, ra=0))
-ss.add('GENCLS', dict(idx='G2', bus=2, gen=2, Sn=100, M=9.82, D=0, xd1=0.1198,  ra=0))
+ss.add('REGCA1', dict(idx='G2', bus=2, gen=2, Sn=100, xs=0.1198, ra=0))
+#ss.add('GENCLS', dict(idx='G2', bus=2, gen=2, Sn=100, M=9.82, D=0, xd1=0.1198,  ra=0))
 #GENERATOR 1: Base = 100MVA, M = 6.08, xd = 0.1813
 ss.add('GENCLS', dict(idx='G3', bus=3, gen=3, Sn=100, M=7.20,  D=0, xd1=0.1813, ra=0))
 
@@ -21,7 +21,7 @@ ss.add('GENCLS', dict(idx='G3', bus=3, gen=3, Sn=100, M=7.20,  D=0, xd1=0.1813, 
     # Add a Toggle to trip GENROU_2 at t=1 second
 gen_indxs = list(ss.GENCLS.idx.v)   # list of each index for each generator
 ren_indxs = list(ss.REGCA1.idx.v)
-ss.add("Toggle", model="GENCLS", dev=gen_indxs[1], t=1.0)   # trips generator 1 at time 1.0 s
+#ss.add("Toggle", model="GENCLS", dev=gen_indxs[1], t=1.0)   # trips generator 1 at time 1.0 s
 
 ss.setup()
 andes.io.xlsx.write(ss, 'Jasmine_wscc9_dyn.xlsx', overwrite=True)
@@ -49,7 +49,8 @@ ss.GENCLS.M.v[1] = 7.2  # HVDC grid forming converter
 
 # Run a time domain simulation
 ss.PFlow.run()
-ss.TDS.config.tf = 10.0
+ss.TDS.config.tf = 8
+ss.TDS.config.no_tqdm = 1
 ss.TDS.config.criteria = 0
 ss.TDS.run()
 
@@ -63,7 +64,7 @@ ss.TDS.load_plotter()
 
 fig, ax = ss.TDS.plt.plot(
     ss.GENCLS.omega,
-    a=(0, 1, 2),  # Plots first 3 buses (generator buses)
+    a=(0, 1),  # Plots first 3 buses (generator buses)
     ytimes=60,  # convert from per-unit frequency to Hz for a 60 Hz system
     ylabel='Frequency [Hz]'
 )
@@ -72,7 +73,7 @@ fig, ax = ss.TDS.plt.plot(
 fig, cx = ss.TDS.plt.plot(
     ss.REGCA1.v,
 )
-"""
+
 
 fig, bx = ss.TDS.plt.plot(
     ss.Bus.v,
@@ -89,8 +90,15 @@ bx.legend(
     frameon=False,
 )
 
+
 fig.tight_layout()
 plt.show()      # ----------------------------------------- end Claude.ai
+"""
+
+fig, dx = ss.TDS.plt.plot(
+    ss.GENCLS.M,
+    a=(0,1)
+)
 
 
 
