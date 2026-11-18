@@ -114,7 +114,7 @@ def build(out='9bus_sim.xlsx', **overrides):
     ss.add('PQ', dict(idx='DC_7', 
                       name='DataCenter', 
                       bus=7,
-                      p0=p['dc_P'], 
+                     p0=p['dc_P'], 
                       q0=p['dc_Q']))
 
     ss.setup()
