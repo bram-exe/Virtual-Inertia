@@ -98,11 +98,6 @@ fig.tight_layout()
 plt.show()      # ----------------------------------------- end Claude.ai
 """
 
-fig, dx = ss.TDS.plt.plot(
-    ss.GENCLS.M,
-    a=(0,1)
-)
-
 
 
 

@@ -37,7 +37,14 @@ print('Inertia: ', ss.REGCV1.M.v)
 # Print bus frequency
 # H = (Pm - Pe)fs / (2 * ROCOF)     using swing equation
 # https://ieeexplore.ieee.org/document/10977593 
-print(f'bus frequencies: {ss.BusFreq.f.v}')
+frequencies = ss.TDS.get_timeseries(ss.BusFreq.f) * 60
+print(f'bus frequencies: {frequencies.head()}')
+
+plt.figure()
+plt.plot(ss.dae.ts.t, frequencies)
+plt.legend([f'Bus {bus}' for bus in ss.Bus.idx.v])
+plt.show()
+
 
 
 
