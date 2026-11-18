@@ -7,3 +7,6 @@ Jasmine_work\Jasmine_bus_freq_test.py
 
 # Personal VS Code settings (machine-specific paths)
 .vscode/
+
+# Python bytecode
+__pycache__/

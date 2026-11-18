@@ -3,7 +3,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 
-ss = andes.load('9bus_sim.xlsx', no_output=True)
+ss = andes.load('9bus_sim_bram.xlsx', no_output=True)
 
 G = nx.Graph()
 for b in ss.Bus.idx.v:

@@ -44,7 +44,7 @@ Load = dict(
 )
 
 
-def build(out='9bus_sim.xlsx', **overrides):
+def build(out='9bus_sim_bram.xlsx', **overrides):
     p = {**DEFAULTS, **overrides}
     ss = andes.load(andes.get_case('wscc9/wscc9.xlsx'), setup=False, no_output=True)
 
@@ -134,7 +134,7 @@ def build(out='9bus_sim.xlsx', **overrides):
 
 if __name__ == '__main__':
     ap = argparse.ArgumentParser()
-    ap.add_argument('--out', default='9bus_sim.xlsx')
+    ap.add_argument('--out', default='9bus_sim_bram.xlsx')
     for k, v in DEFAULTS.items():
         ap.add_argument(f'--{k}', type=float, default=v)
     a = vars(ap.parse_args())
