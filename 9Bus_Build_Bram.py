@@ -9,11 +9,10 @@
     Load 7: Data center (New PQ Load)
     Load 8: WSCC Load????
     Change to fort collins load^^^
-
-
-
 """
 import andes 
+import numpy as np
+import matplotlib.pyplot as plt
 import argparse
 
 # Using 100MVA system base 
@@ -30,15 +29,20 @@ REGCV1_GAINS = dict(
     kv = 0.0, #Voltage droop/ reactive Power vs voltage 
     xs = 0.1, #reactance between converter and grid
     Tc = 0.01, #10ms lag 
-    Kpvd = 5.0,
-    Kivd = 0.1, 
-    Kpvq = 5.0,
-    Kivq = 0.1, 
-    KpId = 0.05,
-    KiId=0.1, 
-    KpIq = 0.05,
-    KiIq = 0.1,
+    Kpvd = 15.0,
+    Kivd = 1.0, 
+    Kpvq = 15.0,
+    Kivq = 1.0, 
+    KpId = 1.0,
+    KiId = 1.0, 
+    KpIq = 1.0,
+    KiIq = 1.0,
 )
+
+Load = dict(
+
+)
+
 
 def build(out='9bus_sim.xlsx', **overrides):
     p = {**DEFAULTS, **overrides}
@@ -81,7 +85,7 @@ def build(out='9bus_sim.xlsx', **overrides):
     #-------------------------Generator 2-------------------------
     #WECC Modeling chain technique:
 
-    #REPCA1 plant controller controls plant level V/Q/Freq
+    #REPCA1 plant controller controls plant level V/Q/Freq <come back 
     #                        v
     #REECA1 for electrical controls decides what P and Q to produce, current limits
     #                        v
@@ -117,6 +121,13 @@ def build(out='9bus_sim.xlsx', **overrides):
                      p0=p['dc_P'], 
                       q0=p['dc_Q']))
 
+    #ss.add("PQ", dict(idx='Load Profile'
+
+
+
+
+    #))
+
     ss.setup()
     andes.io.xlsx.write(ss, out, overwrite=True)
     return out
@@ -131,9 +142,52 @@ if __name__ == '__main__':
     out = build(a.pop('out'), **a)
     print('wrote', out)
     # --- sanity check: 10 s with NO disturbance, frequency should stay at 60 Hz ---
-    ss = andes.load(out, no_output=True)
+    #ss = andes.load(out, no_output=True)
+    #ss.PFlow.run()
+    #ss.TDS.config.tf = 10
+    #ss.TDS.run()
+    #f = ss.dae.ts.x[:, ss.GENROU.omega.a[0]] * 60
+    #print(f'gas unit freq: min {f.min():.4f} Hz, max {f.max():.4f} Hz')
+
+    #print(ss.PQ.as_df())
+    # --- trip scenario: switch one device off at t = 1 s ---
+    TRIP_MODEL, TRIP_DEV, T_TRIP, TF = 'PQ', 'DC_7', 1.0, 20.0
+
+    ss = andes.load(out, setup=False, no_output=True)   # setup=False so we can add the Toggle
+    ss.add('Toggle', dict(model=TRIP_MODEL, dev=TRIP_DEV, t=T_TRIP))
+    ss.setup()
     ss.PFlow.run()
-    ss.TDS.config.tf = 10
+    ss.TDS.config.tf = TF
+    ss.TDS.config.criteria = 0
     ss.TDS.run()
-    f = ss.dae.ts.x[:, ss.GENROU.omega.a[0]] * 60
-    print(f'gas unit freq: min {f.min():.4f} Hz, max {f.max():.4f} Hz')
+
+    t   = np.array(ss.dae.ts.t)
+    f_g = ss.dae.ts.x[:, ss.GENROU.omega.a[0]] * 60
+    f_v = ss.dae.ts.y[:, ss.REGCV1.omega.a[0]] * 60
+    i0, i1 = np.searchsorted(t, T_TRIP), np.searchsorted(t, T_TRIP + 0.5)
+    print(f'{TRIP_DEV} trip: peak {f_g.max():.3f} Hz | nadir {f_g.min():.3f} Hz | '
+          f'RoCoF {(f_g[i1]-f_g[i0])/(t[i1]-t[i0]):+.3f} Hz/s | final {f_g[-1]:.3f} Hz')
+
+    plt.plot(t, f_g, label='Gas unit (G1)')
+    plt.plot(t, f_v, '--', label='GFM inverter (G3)')
+    plt.axhline(60, color='k', lw=0.4)
+    plt.xlabel('Time [s]'); plt.ylabel('Frequency [Hz]')
+    plt.title(f'{TRIP_DEV} trip at t = {T_TRIP} s')
+    plt.legend(); plt.show()
+
+    #Create visualizer 
+    
+
+    #Load profiles??? 
+     #Research for load profiles
+       #Creating an interface for the model -> 
+         #argparse()
+    #Researching proper values for test case
+
+    #Build a test/trip scenario
+        #Look into ANDES Gen trip scenario to modify for a load
+        #Node with weak inertia -> dispatch inertia -> correct it. 
+
+    # How can you crossreference a class between pythn files
+    # get_time.py 
+
