@@ -151,6 +151,7 @@ if __name__ == '__main__':
 
     #print(ss.PQ.as_df())
     # --- trip scenario: switch one device off at t = 1 s ---
+    """
     TRIP_MODEL, TRIP_DEV, T_TRIP, TF = 'PQ', 'DC_7', 1.0, 20.0
 
     ss = andes.load(out, setup=False, no_output=True)   # setup=False so we can add the Toggle
@@ -190,4 +191,74 @@ if __name__ == '__main__':
 
     # How can you crossreference a class between pythn files
     # get_time.py 
+"""
+def run_trip(M, trip_model='PQ', trip_dev='DC_7', t_trip=1.0, tf=20.0, **overrides):
+    """Build a case with virtual inertia M, trip one device at t_trip, return the results."""
+    out = build(f'trip_M{M}.xlsx', M_vsm=M, **overrides)
+    ss = andes.load(out, setup=False, no_output=True)
+    ss.add('Toggle', dict(model=trip_model, dev=trip_dev, t=t_trip))   # the trip event
+    ss.setup()
+    ss.PFlow.run()
+    ss.TDS.config.tf = tf
+    ss.TDS.config.criteria = 0      # don't stop early if angles swing apart
+    ss.TDS.config.no_tqdm = 1       # hide the progress bar
+    ss.TDS.run()
 
+    t = np.array(ss.dae.ts.t)
+    f = ss.dae.ts.x[:, ss.GENROU.omega.a[0]] * 60          # gas unit freq [Hz] (state -> ts.x)
+    f_v = ss.dae.ts.y[:, ss.REGCV1.omega.a[0]] * 60        # GFM inverter freq [Hz] (algebraic -> ts.y)
+    i0, i1 = np.searchsorted(t, t_trip), np.searchsorted(t, t_trip + 0.5)
+    return dict(M=M, t=t, f=f, f_v=f_v,
+                peak=f.max(), nadir=f.min(),
+                rocof=(f[i1] - f[i0]) / (t[i1] - t[i0]),  # over first 0.5 s after trip
+                final=f[-1], t_end=t[-1])
+
+
+if __name__ == '__main__':
+    
+    TRIP_MODEL, TRIP_DEV = 'PQ', 'DC_7'     # what trips 
+    M_LIST = [0.5, 1, 2, 4, 8, 16, 32]      # virtual inertia 
+    ROCOF_LIMIT = 1.0                       # Hz/s PLACEHOLDER
+
+    out = build('9bus_sim_bram.xlsx')
+    print('wrote', out)
+    ss = andes.load(out, no_output=True)
+    ss.PFlow.run()
+    ss.TDS.config.tf = 10
+    ss.TDS.config.no_tqdm = 1
+    ss.TDS.run()
+    f = ss.dae.ts.x[:, ss.GENROU.omega.a[0]] * 60
+    print(f'sanity check (no disturbance): {f.min():.4f} to {f.max():.4f} Hz  -> should be 60.0000')
+
+    results = []
+    for M in M_LIST:
+        print(f'running M = {M} s ...')
+        results.append(run_trip(M, TRIP_MODEL, TRIP_DEV))
+
+    print(f"\n{TRIP_DEV} trip at t = 1 s")
+    print(f"{'M [s]':>6} {'H [s]':>6} {'MW*s':>7} {'peak [Hz]':>10} {'nadir [Hz]':>11} {'RoCoF [Hz/s]':>13} {'final [Hz]':>11}")
+    for r in results:
+        H = r['M'] / 2
+        print(f"{r['M']:>6} {H:>6} {H*100:>7.0f} {r['peak']:>10.3f} {r['nadir']:>11.3f} "
+              f"{r['rocof']:>13.3f} {r['final']:>11.3f}")
+
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 4.5))
+    cmap = plt.cm.viridis
+    for i, r in enumerate(results):
+        ax1.plot(r['t'], r['f'], color=cmap(i / (len(results) - 1)), label=f"M = {r['M']} s")
+    ax1.axhline(60, color='k', lw=0.4)
+    ax1.set_xlabel('Time [s]'); ax1.set_ylabel('Gas unit frequency [Hz]')
+    ax1.set_title(f'{TRIP_DEV} trip: frequency response')
+    ax1.legend(fontsize=8)
+
+    Ms = [r['M'] for r in results]
+    ax2.plot(Ms, [abs(r['rocof']) for r in results], 'o-')
+    ax2.axhline(ROCOF_LIMIT, color='r', ls='--', label=f'RoCoF limit ({ROCOF_LIMIT} Hz/s, placeholder)')
+    ax2.set_xscale('log')
+    ax2.set_xlabel('Virtual inertia M [s]'); ax2.set_ylabel('|RoCoF| [Hz/s]')
+    ax2.set_title('RoCoF vs virtual inertia')
+    ax2.legend()
+
+    plt.tight_layout()
+    plt.savefig('trip_sweep.png', dpi=150)
+    plt.show()
